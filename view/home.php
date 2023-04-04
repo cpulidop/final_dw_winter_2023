@@ -5,6 +5,9 @@ require_once("../view/templates/ViewTemplate.php");
 $view = new ViewTemplate();
 
 session_start();
+if (isset($_SESSION["game"]["level"])) {
+    header("Location: levels/level" . $_SESSION["game"]["level"] .".php");
+}
 ?>
 <?php echo $view->getHeader(); ?>
 

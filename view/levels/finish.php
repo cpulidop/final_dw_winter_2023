@@ -15,7 +15,7 @@ unset($_SESSION["game"]);
 
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Game Over</h1>
+<h1 class="h3 mb-2 text-gray-800">Game finished</h1>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -25,7 +25,7 @@ unset($_SESSION["game"]);
         <form>
             <div class="row" style="text-align: center;">
                 <div class="form-group col-md-12">
-                    Sorry you don't have more lives left.
+                    You have successfully completed the game Congratulations!
                 </div>
                 <div class="col-md-12">
                     <a class="btn btn-dark" href="<?= BASE_URL . "/view/home.php" ?>">Go Home</a>

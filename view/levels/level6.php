@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="col-md-4">
                     <?php if ($gameInfo["level"] > 6): ?>
-                        <a href="win.php" class="btn btn-success">
+                        <a href="finish.php" class="btn btn-success">
                             Finish
                         </a>
                     <?php endif; ?>

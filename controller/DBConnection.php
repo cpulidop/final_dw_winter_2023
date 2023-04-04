@@ -33,7 +33,9 @@ class DBConnection {
         }
 
         $stmt = $this->connectionString->prepare($sqlCommand);
-        $stmt->bind_param($types, ...$args_ref);
+        if (count($params) > 0) {
+            $stmt->bind_param($types, ...$args_ref);
+        }
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();

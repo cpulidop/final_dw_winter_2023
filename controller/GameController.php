@@ -1,5 +1,6 @@
 <?php
 require_once("Controller.php");
+include(__DIR__ . "/../model/SessionModel.php");
 
 class GameController extends Controller {
 
@@ -33,6 +34,49 @@ class GameController extends Controller {
         }
 
         return -1;
+    }
+
+    public function getSessions() {
+        $sessionModel = new SessionModel();
+        $sessions = $sessionModel->find([]);
+        $result = [];
+
+        if (!empty($sessions)) {
+            foreach ($sessions as $session) {
+                $result[] = [
+                    "username" => $session["username"],
+                    "status" => $session["result"],
+                    "lives" => $session["lives_used"],
+                    "date" => $session["created"],
+                ];
+            }
+        }
+
+        return $result;
+    }
+
+    public function finish($session) {
+        if (isset($session["game"])) {
+            $status = "incomplete";
+            $livesUsed = 6 - $session["game"]["lives"];
+            if ($session["game"]["lives"] <= 0) { //GameOver
+                $status = "failure";
+
+            } else if ($session["game"]["level"] == 7) { // WIN
+                $status = "success";
+
+            }
+
+            $sessionModel = new SessionModel();
+            $data = [
+                "user_id" => @$session["user"]["id"],
+                "result" => $status,
+                "lives_used" => $livesUsed,
+                "created" => date("Y-m-d H:i:s"),
+            ];
+            $insert = $sessionModel->new($data);
+
+        }
     }
 
     public function level1($post) {
