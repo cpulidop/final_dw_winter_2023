@@ -4,7 +4,6 @@ require_once("../controller/GameController.php");
 require_once("../view/templates/ViewTemplate.php");
 $game = new GameController();
 $view = new ViewTemplate();
-session_start();
 
 $sessions = $game->getSessions();
 

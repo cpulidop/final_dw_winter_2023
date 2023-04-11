@@ -11,8 +11,6 @@ $gameInfo = [];
 $status = "";
 $validationClass = "";
 
-session_start();
-
 if (!isset($_SESSION["game"])) {
     $game->newGame();
 }

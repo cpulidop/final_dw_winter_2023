@@ -5,7 +5,11 @@ require_once(__DIR__ . "/../../view/templates/ViewTemplate.php");
 $view = new ViewTemplate();
 $game = new GameController();
 
-session_start();
+if (isset($_SESSION["game"]["lives"]) && $_SESSION["game"]["lives"] > 0) {
+    header("Location: level" . $_SESSION["game"]["level"] .".php");
+    exit;
+}
+
 $game->finish($_SESSION);
 unset($_SESSION["game"]);
 

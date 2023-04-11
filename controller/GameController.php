@@ -4,6 +4,15 @@ include(__DIR__ . "/../model/SessionModel.php");
 
 class GameController extends Controller {
 
+
+    public function __construct()
+    {
+        session_start();
+        if(session_id() == '' || !isset($_SESSION) || session_status() === PHP_SESSION_NONE) {
+            header("Location: ../login.php");
+        }
+    }
+
     public function newGame() {
         if (isset($_SESSION["user"])) {
             $_SESSION["game"] = [
@@ -326,6 +335,7 @@ class GameController extends Controller {
     }
 
     public function getSetByLevel($level) {
+        $this->validateCurrentLevel($level);
         $set = [];
         switch (true){
             case $level == 1 || $level == 2 || $level == 5:
@@ -342,6 +352,14 @@ class GameController extends Controller {
             "set" => $set,
             "setSigned" => $setSigned,
         ];
+    }
+
+    private function validateCurrentLevel($level) {
+        if ($_SESSION["game"]['level'] < $level) {
+
+            header("Location: level" . $_SESSION["game"]['level'] . ".php");
+        }
+
     }
 
     private function valitateSigned($signed, $set) {
