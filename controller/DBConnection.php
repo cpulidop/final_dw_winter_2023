@@ -8,6 +8,10 @@ class DBConnection {
     public function __construct()
     {
         $this->connectionString = $this->connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DBNAME);
+
+        if (!$this->connectionString) {
+            header("Location: error.php");
+        }
     }
 
     private function connect($hostname, $username, $password, $dbname) {
